@@ -1,27 +1,12 @@
 const express = require('express');
 const app = express();
-const {products} = require('./data.js')
+let {people} = require('./data');
 
-const logger =(req,res,next) => {
-    const method = req.method;
-    const url = req.url;
-    console.log(method, url)
-    next()
-}
-
-app.listen(5001, ()=>{
-    console.log('server is listening on port 5001')
+app.get('/api/people',(req,res)=>{
+    res.status(200).json({success: true, data: people})
 })
 
-app.get('/', logger, (req,res) =>{
-   
-    res.send('Home')
+app.listen(5001, () =>{
+    console.log('app is listening on 5001')
 })
-
-
-app.get('/about', (req,res) =>{
-    res.send('About')
-})
-
-
 
