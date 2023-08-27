@@ -3,6 +3,12 @@ require('dotenv').config()
 
 const express = require('express');
 const app = express();
+app.use(express.json());
+
+const tasks = require('./routes/tasks')
+
+app.use('/api/', tasks);
+
 let {people} = require('./data');
 
 const {createTask, getAllTasks, getTask, updateTask, deleteTask} = require('./controllers/tasks')
@@ -26,4 +32,9 @@ try {
 }
 
 start()
-app.get('/api',getTask)
+
+// app.get('/api/getsingletask/:id',getTask)
+// app.post('/api/post',createTask)
+// app.get('/api/getalltasks',getAllTasks)
+// app.delete('/api/deletesingletask/:id',deleteTask)
+// app.patch('/api/updatesingletask/:id',updateTask)
